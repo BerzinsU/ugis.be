@@ -1,4 +1,4 @@
-(defproject ugis.be "0.1.0-SNAPSHOT"
+(defproject ugis-be "0.1.0-SNAPSHOT"
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
@@ -28,7 +28,7 @@
   :cljsbuild {:builds {:app
                        {:source-paths ["src" "env/dev/cljs"]
                         :compiler
-                        {:main "ugis.be.dev"
+                        {:main "ugis-be.dev"
                          :output-to "docs/js/app.js"
                          :output-dir "docs/js/out"
                          :asset-path   "js/out"
