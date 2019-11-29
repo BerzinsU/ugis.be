@@ -1,4 +1,4 @@
-(ns ugis-be.components
+(ns ugis_be.components
   (:require [reagent.core :as reagent]))
 
 

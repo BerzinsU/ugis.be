@@ -1,6 +1,7 @@
-(ns ugis-be.core
+(ns ugis_be.core
   (:require [reagent.core :as reagent]
-            [ugis-be.components :as c]))
+            [re-frame.core :as rf]
+            [ugis_be.components :as c]))
 
 ;; -------------------------
 ;; Views
@@ -13,17 +14,13 @@
                       :max-width     "100%"
                       :width         "auto"
                       :height        "auto"}
-              :src   "https://media.giphy.com/media/3ornk57KwDXf81rjWM/giphy.gif"}]
+              :src   "https://media2.giphy.com/media/Nx0rz3jtxtEre/giphy.gif"}]
        [c/h1 "My name is Uģis"]
        [:section {:style {:align-self "flex-start"}}
         [c/h2 "Current endevours:"]
         [:ul {:style {:margin-bottom 25
                       :padding-left  20}}
-         [:li "Making this page.... (now on ClojureScript)"]
-         [:li "Working together with some cool people "]
-         [:li "Co-organizing \"FrontEnd Meetup Riga\""]
-         [:li "Learning to fly drone"]
-         [:li "Planning on making 2017 awesome"]]]
+         [:li "Making this page.... (now on ClojureScript)"]]]
        [:section {:style {:align-self "flex-start"}}
         [c/h2 "Where to contact:"]
         [:ul {:style {:margin-bottom 25
@@ -32,13 +29,24 @@
           [:a {:href "mailto:berzinsu@gmail.com"}
            "berzinsu@gmail.com"]]]]
        [c/h3
-        "More comming soon... (tomorow)"]])
+        "More coming soon..."]])
 
 ;; -------------------------
 ;; Initialize app
 
-(defn mount-root []
-      (reagent/render [home-page] (.getElementById js/document "app")))
+(defn render
+  []
+  (reagent/render [home-page]
+                  (js/document.getElementById "app")))
 
-(defn init! []
-      (mount-root))
+(defn ^:dev/after-load clear-cache-and-render!
+  []
+  ;; The `:dev/after-load` metadata causes this function to be called
+  ;; after shadow-cljs hot-reloads code. We force a UI update by clearing
+  ;; the Reframe subscription cache.
+  (rf/clear-subscription-cache!)
+  (render))
+
+(defn run
+  []
+  (render))                         ;; mount the application's ui into '<div id="app" />'

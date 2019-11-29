@@ -16,3 +16,7 @@ pom.xml.asc
 *.log
 /.env
 .idea/
+.shadow-cljs/
+node_modules/
+/docs/js/cljs-runtime/
+*.iml
